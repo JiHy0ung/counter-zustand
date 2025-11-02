@@ -1,11 +1,23 @@
-import { Box, Button, Container } from "@mui/material";
+import { Box, Button, Container, TextField } from "@mui/material";
 import "./App.css";
 import counterStore from "./stores/counterStore";
 import CountBox from "./components/CountBox";
+import { useState } from "react";
 
 function App() {
   const { count, increase, increaseBy, decrease, decreaseBy, reset } =
     counterStore();
+
+  const [customValue, setCustomValue] = useState("");
+
+  const handleCustomIncrease = () => {
+    increaseBy(+customValue);
+  };
+
+  const handleCustomDecrease = () => {
+    decreaseBy(+customValue);
+  };
+
   return (
     <Container
       sx={{
@@ -52,10 +64,47 @@ function App() {
           </Button>
         </Box>
       </Box>
+      <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+        <TextField
+          type="number"
+          value={customValue}
+          onChange={(e) => setCustomValue(e.target.value)}
+          onFocus={() => setCustomValue("")}
+          placeholder="원하는 숫자 입력"
+          size="small"
+          sx={{ width: "150px" }}
+        />
+        <Button
+          onClick={handleCustomDecrease}
+          variant="contained"
+          sx={{
+            border: "2px solid #0d25ffff",
+            backgroundColor: "white",
+            color: "black",
+          }}
+        >
+          -
+        </Button>
+        <Button
+          onClick={handleCustomIncrease}
+          variant="contained"
+          sx={{
+            fontWeight: "700",
+            border: "2px solid #ff0c0cff",
+            backgroundColor: "white",
+            color: "black",
+          }}
+        >
+          +
+        </Button>
+      </Box>
       <Button
         onClick={reset}
         variant="contained"
-        sx={{ backgroundColor: "black" }}
+        sx={{
+          backgroundColor: "black",
+          fontWeight: "700",
+        }}
       >
         reset
       </Button>
