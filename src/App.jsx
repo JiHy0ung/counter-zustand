@@ -72,7 +72,7 @@ function App() {
           onFocus={() => setCustomValue("")}
           placeholder="원하는 숫자 입력"
           size="small"
-          sx={{ width: "150px" }}
+          sx={{ backgroundColor: "white", width: "150px" }}
         />
         <Button
           onClick={handleCustomDecrease}
